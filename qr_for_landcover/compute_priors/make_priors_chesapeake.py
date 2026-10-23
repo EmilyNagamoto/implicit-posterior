@@ -8,12 +8,13 @@ import rasterio
 import torch as T
 from torchvision.transforms import GaussianBlur
 
-sys.path.append("/home/esther/qr_for_landcover/scripts")
+here = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(here, "..", "scripts"))
 import landcover_definitions as lc
 
 use_gpu = True
 if use_gpu:
-    device = T.device('cuda:0')
+    device = T.device('cuda:0' if T.cuda.is_available() else 'cpu')
 else:
     device = T.device('cpu')
     
@@ -21,8 +22,11 @@ sys.path.append('../scripts')
 import util
 from general_prior_calculation import calculate_prior_preblurred
 
-CC_data_dir = "/home/esther/torchgeo_data/cvpr_chesapeake_landcover"
-cooc_data_dir = "/home/esther/qr_for_landcover/compute_priors/cooccurrence_matrices/chesapeake"
+CC_data_dir = os.environ.get(
+    "CC_DATA_DIR",
+    os.path.join(here, "..", "..", "..", "torchgeo_data",
+                 "cvpr_chesapeake_landcover", "cvpr_chesapeake_landcover"))
+cooc_data_dir = os.path.join(here, "cooccurrence_matrices", "chesapeake")
 
 def unique_tile_ids_from_dir(data_dir_this):
     """Get tile ids from a provided data dir."""

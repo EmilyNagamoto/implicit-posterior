@@ -4,16 +4,20 @@ import numpy as np
 import rasterio
 import sklearn.preprocessing
 
-sys.path.append("/home/esther/qr_for_landcover/scripts")
+here = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(here, "..", "scripts"))
 import landcover_definitions as lc
 
 # number of classes for each LC classification scheme
 num_cs_classes = len(lc.class_definitions["chesapeake_7"])
 num_nlcd_classes = len(lc.class_definitions["nlcd"])
 
-# data dir in which the Chesapeake labels van be found
-CC_data_dir = "/home/esther/torchgeo_data/cvpr_chesapeake_landcover"
-cooc_ouput_dir = "/home/esther/qr_for_landcover/compute_priors/cooccurrence_matrices"
+# data dir in which the Chesapeake labels can be found
+CC_data_dir = os.environ.get(
+    "CC_DATA_DIR",
+    os.path.join(here, "..", "..", "..", "torchgeo_data",
+                 "cvpr_chesapeake_landcover", "cvpr_chesapeake_landcover"))
+cooc_ouput_dir = os.path.join(here, "cooccurrence_matrices")
 
 
 def unique_tile_ids_from_dir(data_dir_this):

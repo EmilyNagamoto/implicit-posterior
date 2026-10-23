@@ -27,7 +27,7 @@ NLCD_CLASS_DEFINITIONS = {
     95: ("Emergent Herbaceous Wetlands", "Areas where perennial herbaceous vegetation accounts for greater than 80% of vegetative cover and the soil or substrate is periodically saturated with or covered with water.")
 }
 
-# Copied from the emebedded color table in the NLCD data files
+# Copied from the embedded color table in the NLCD data files
 NLCD_CLASS_COLORS = {
     0:  (0, 0, 0, 0),
     11: (70, 107, 159, 255),

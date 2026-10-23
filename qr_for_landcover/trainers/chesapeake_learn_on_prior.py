@@ -49,7 +49,7 @@ def get_colors(class_colors):
 lc_colors = {"chesapeake_4_no_zeros": get_colors(CHESAPEAKE_4_NO_ZEROS_CLASS_COLORS)}
 
 
-# visualize predicitons and priors
+# visualize predictions and priors
 def vis_lc(r, lc_type, renorm=True, reindexed=True):
     """Visualize colors for certain landcover type."""
     colors = lc_colors[lc_type]

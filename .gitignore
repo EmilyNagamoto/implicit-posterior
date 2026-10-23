@@ -1,0 +1,5 @@
+.ipynb_checkpoints/
+__pycache__/
+*.gstmp
+*.zip
+qr_for_landcover/compute_priors/cooccurrence_matrices/chesapeake/
