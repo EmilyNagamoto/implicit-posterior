@@ -58,14 +58,14 @@ def calculate_prior_preblurred(nlcd_blurred,
     """Fuse input data into a prior, where NLCD input is blurred."""
     
     # nlcd comes as "hard" classes, so translate them to a soft prior
-    prior = blurred_nlcd_to_prior_soft(nlcd_blurred.astype(float),nlcd_mapping_matrix)
+    prior = blurred_nlcd_to_prior_soft(nlcd_blurred.astype(np.float32),nlcd_mapping_matrix)
     # normalize before adding in the
     prior = T.nn.functional.normalize(T.tensor(prior),p=1,dim=0).cpu().numpy()
     
     # add in these features -- this will give them half weight in the total sum
-    prior[water_idx] += water.astype('float')
-    prior[road_idx] += roads.astype('float')
-    prior[building_idx] += buildings.astype('float')
+    prior[water_idx] += water.astype(np.float32)
+    prior[road_idx] += roads.astype(np.float32)
+    prior[building_idx] += buildings.astype(np.float32)
     
     # normalize then release from GPU
     prior =  T.nn.functional.normalize(T.tensor(prior),p=1,dim=0).cpu().numpy()
